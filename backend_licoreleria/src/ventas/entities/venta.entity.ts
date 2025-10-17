@@ -2,10 +2,13 @@ import { Producto } from 'src/productos/entities/producto.entity';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('ventas')
@@ -22,6 +25,15 @@ export class Venta {
   montoTotal: number;
   @Column('decimal', { name: 'metodo_pago' })
   metodoPago: number;
+
+  @CreateDateColumn({ name: 'fecha_creacion' })
+  fechaCreacion: Date;
+
+  @UpdateDateColumn({ name: 'fecha_modificacion' })
+  fechaModificacion: Date;
+
+  @DeleteDateColumn({ name: 'fecha_eliminacion' })
+  fechaEliminacion: Date;
 
   @ManyToOne(() => Producto, (producto) => producto.ventas)
   @JoinColumn({ name: 'id_producto', referencedColumnName: 'id' })

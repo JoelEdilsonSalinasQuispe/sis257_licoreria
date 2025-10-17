@@ -1,5 +1,5 @@
 import { Venta } from 'src/ventas/entities/venta.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('usuarios')
 export class Usuario {
@@ -15,6 +15,15 @@ export class Usuario {
   rol: string;
   @Column('date', { name: 'fecha_registro' })
   fechaResgistro: Date;
+
+  @CreateDateColumn({ name: 'fecha_creacion' })
+  fechaCreacion: Date;
+
+  @UpdateDateColumn({ name: 'fecha_modificacion' })
+  fechaModificacion: Date;
+
+  @DeleteDateColumn({ name: 'fecha_eliminacion' })
+  fechaEliminacion: Date;
 
   @OneToMany(() => Venta, (Venta) => Venta.usuario)
   ventas: Venta[];
